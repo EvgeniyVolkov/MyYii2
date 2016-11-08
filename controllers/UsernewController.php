@@ -6,10 +6,24 @@ use yii\web\Controller;
 use yii\data\Pagination;
 use app\models\UserNew;
 
-class UserController extends Controller
+class UsernewController extends Controller
 {
     public function actionIndex()
     {
+        $user = UserNew::findOne('6');
+        //echo 'Old: ' . $user->name . '<br />';
+
+        $user->name = 'Tom';
+        //echo 'New: ' .  $user->name . '<br />';
+        $user->save();
+
+//        $user2 = UserNew::findOne('4');
+//        $user2->delete();
+
+        $newUser = new UserNew();
+        $newUser->name = 'Spike';
+        $newUser->save();
+
         $query = UserNew::find();
 
         $pagination = new Pagination([
@@ -27,5 +41,4 @@ class UserController extends Controller
             'pagination' => $pagination,
         ]);
     }
-    
 }
